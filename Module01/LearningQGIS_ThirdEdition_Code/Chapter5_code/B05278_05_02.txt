@@ -1,0 +1,2 @@
+CASE WHEN toll = 1 THEN 'red' ELSE 'lightgray' END
+2.5 / scalerank 

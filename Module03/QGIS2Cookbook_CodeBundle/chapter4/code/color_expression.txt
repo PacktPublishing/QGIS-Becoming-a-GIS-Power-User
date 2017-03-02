@@ -1,0 +1,11 @@
+color_hsla(
+   0,
+   scale_linear( 
+       day(age(todatetime(animation_datetime()),
+               todatetime("EVENT_DATE"))),
+       0,31,
+       100,0
+   ),
+   50,
+   128
+)

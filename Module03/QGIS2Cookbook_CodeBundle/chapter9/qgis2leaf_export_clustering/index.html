@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>QGIS2leaf webmap</title>
+	
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" /> <!-- we will us e this as the styling script for our webmap-->
+	<link rel="stylesheet" href="css/MarkerCluster.css" />
+	<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+	<link rel="stylesheet" type="text/css" href="css/own_style.css">
+	<link rel="stylesheet" href="css/label.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- this is the javascript file that does the magic-->
+	<script src="js/Autolinker.min.js"></script>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<div id="map"></div> <!-- this is the initial look of the map. in most cases it is done externally using something like a map.css stylesheet were you can specify the look of map elements, like background color tables and so on.-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script> <!-- this is the javascript file that does the magic-->
+	<script src="js/leaflet-hash.js"></script>
+	<script src="js/label.js"></script>
+	<script src="js/leaflet.markercluster.js"></script>
+	<input id="slide" type="range" min="0" max="1" step="0.1" value="1" onchange="updateOpacity(this.value)">
+				<script src='data/exp_schoolswake.js' ></script>
+				
+				<script src='data/exp_censuswake2000.js' ></script>
+				
+	<script>
+		var map = L.map('map', { zoomControl:true }).fitBounds([[35.505410343,-79.1464790796],[36.0872792126,-78.1004698411]]);
+		var hash = new L.Hash(map); //add hashes to html address to easy share locations
+		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
+	var feature_group = new L.featureGroup([]);
+
+	var raster_group = new L.LayerGroup([]);
+	
+		var basemap_0 = L.tileLayer('http://a.tile.stamen.com/terrain/{z}/{x}/{y}.png', { 
+			attribution: additional_attrib + 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});	
+		basemap_0.addTo(map);	
+	var layerOrder=new Array();var overlay_USGSEROSOrthoNAIP = L.tileLayer.wms('http://isse.cr.usgs.gov/arcgis/services/Orthoimagery/USGS_EROS_Ortho_NAIP/ImageServer/WMSServer?', {
+    layers: '0',
+    format: 'image/png',
+	transparent: true,
+	crs: L.CRS.EPSG4326,
+}).addTo(map);
+							function pop_censuswake2000(feature, layer) {
+										
+	var popupContent = '<table><tr><th scope="row">cat</th><td>' + Autolinker.link(String(feature.properties['cat'])) + '</td></tr><tr><th scope="row">AREA</th><td>' + Autolinker.link(String(feature.properties['AREA'])) + '</td></tr><tr><th scope="row">PERIMETER</th><td>' + Autolinker.link(String(feature.properties['PERIMETER'])) + '</td></tr><tr><th scope="row">TRACT_</th><td>' + Autolinker.link(String(feature.properties['TRACT_'])) + '</td></tr><tr><th scope="row">TRACT_ID</th><td>' + Autolinker.link(String(feature.properties['TRACT_ID'])) + '</td></tr><tr><th scope="row">RINGS_OK</th><td>' + Autolinker.link(String(feature.properties['RINGS_OK'])) + '</td></tr><tr><th scope="row">RINGS_NOK</th><td>' + Autolinker.link(String(feature.properties['RINGS_NOK'])) + '</td></tr><tr><th scope="row">ID</th><td>' + Autolinker.link(String(feature.properties['ID'])) + '</td></tr><tr><th scope="row">FIPSSTCO</th><td>' + Autolinker.link(String(feature.properties['FIPSSTCO'])) + '</td></tr><tr><th scope="row">TRT2000</th><td>' + Autolinker.link(String(feature.properties['TRT2000'])) + '</td></tr><tr><th scope="row">STFID</th><td>' + Autolinker.link(String(feature.properties['STFID'])) + '</td></tr><tr><th scope="row">TRACTID</th><td>' + Autolinker.link(String(feature.properties['TRACTID'])) + '</td></tr><tr><th scope="row">TRACT</th><td>' + Autolinker.link(String(feature.properties['TRACT'])) + '</td></tr></table>';
+	layer.bindPopup(popupContent);
+
+
+				}
+						
+				var exp_censuswake2000JSON = new L.geoJson(exp_censuswake2000,{
+					onEachFeature: pop_censuswake2000,
+					style: function (feature) {
+						return {color: feature.properties.border_color_qgis2leaf,
+								fillColor: feature.properties.color_qgis2leaf,
+								weight: feature.properties.radius_qgis2leaf,
+								opacity: feature.properties.transp_qgis2leaf,
+								fillOpacity: feature.properties.transp_qgis2leaf};
+						}
+					});
+				feature_group.addLayer(exp_censuswake2000JSON);
+				layerOrder[layerOrder.length] = exp_censuswake2000JSON;
+				for (index = 0; index < layerOrder.length; index++) {
+					map.removeLayer(layerOrder[index]);map.addLayer(layerOrder[index]);
+				}
+				
+						//add comment sign to hide this layer on the map in the initial view.
+						exp_censuswake2000JSON.addTo(map);
+							function pop_schoolswake(feature, layer) {
+										
+	var popupContent = '<table><tr><th scope="row">cat</th><td>' + Autolinker.link(String(feature.properties['cat'])) + '</td></tr><tr><th scope="row">TAG</th><td>' + Autolinker.link(String(feature.properties['TAG'])) + '</td></tr><tr><th scope="row">NAMESHORT</th><td>' + Autolinker.link(String(feature.properties['NAMESHORT'])) + '</td></tr><tr><th scope="row">NAMELONG</th><td>' + Autolinker.link(String(feature.properties['NAMELONG'])) + '</td></tr><tr><th scope="row">CORECAPACI</th><td>' + Autolinker.link(String(feature.properties['CORECAPACI'])) + '</td></tr><tr><th scope="row">MOBILEUNIT</th><td>' + Autolinker.link(String(feature.properties['MOBILEUNIT'])) + '</td></tr><tr><th scope="row">MOBILECAPA</th><td>' + Autolinker.link(String(feature.properties['MOBILECAPA'])) + '</td></tr><tr><th scope="row">GLEVEL</th><td>' + Autolinker.link(String(feature.properties['GLEVEL'])) + '</td></tr><tr><th scope="row">LOGRADE</th><td>' + Autolinker.link(String(feature.properties['LOGRADE'])) + '</td></tr><tr><th scope="row">HIGRADE</th><td>' + Autolinker.link(String(feature.properties['HIGRADE'])) + '</td></tr><tr><th scope="row">CALENDAR</th><td>' + Autolinker.link(String(feature.properties['CALENDAR'])) + '</td></tr><tr><th scope="row">HASBASE</th><td>' + Autolinker.link(String(feature.properties['HASBASE'])) + '</td></tr><tr><th scope="row">ISMAGNET</th><td>' + Autolinker.link(String(feature.properties['ISMAGNET'])) + '</td></tr><tr><th scope="row">PHONE</th><td>' + Autolinker.link(String(feature.properties['PHONE'])) + '</td></tr><tr><th scope="row">ADDRNUMBER</th><td>' + Autolinker.link(String(feature.properties['ADDRNUMBER'])) + '</td></tr><tr><th scope="row">ADDRPREFIX</th><td>' + Autolinker.link(String(feature.properties['ADDRPREFIX'])) + '</td></tr><tr><th scope="row">ADDRROOT</th><td>' + Autolinker.link(String(feature.properties['ADDRROOT'])) + '</td></tr><tr><th scope="row">ADDRTYPE</th><td>' + Autolinker.link(String(feature.properties['ADDRTYPE'])) + '</td></tr><tr><th scope="row">ADDRSUFFIX</th><td>' + Autolinker.link(String(feature.properties['ADDRSUFFIX'])) + '</td></tr><tr><th scope="row">ADDRCITY</th><td>' + Autolinker.link(String(feature.properties['ADDRCITY'])) + '</td></tr><tr><th scope="row">ADDRZIPCOD</th><td>' + Autolinker.link(String(feature.properties['ADDRZIPCOD'])) + '</td></tr><tr><th scope="row">SPED</th><td>' + Autolinker.link(String(feature.properties['SPED'])) + '</td></tr><tr><th scope="row">STATUS</th><td>' + Autolinker.link(String(feature.properties['STATUS'])) + '</td></tr><tr><th scope="row">NODEID</th><td>' + Autolinker.link(String(feature.properties['NODEID'])) + '</td></tr><tr><th scope="row">CAPACITYTO</th><td>' + Autolinker.link(String(feature.properties['CAPACITYTO'])) + '</td></tr><tr><th scope="row">ESL</th><td>' + Autolinker.link(String(feature.properties['ESL'])) + '</td></tr><tr><th scope="row">BOARDDIS2</th><td>' + Autolinker.link(String(feature.properties['BOARDDIS2'])) + '</td></tr><tr><th scope="row">PROJ_CAP</th><td>' + Autolinker.link(String(feature.properties['PROJ_CAP'])) + '</td></tr><tr><th scope="row">NOTES</th><td>' + Autolinker.link(String(feature.properties['NOTES'])) + '</td></tr></table>';
+	layer.bindPopup(popupContent);
+
+
+				}
+						
+				var exp_schoolswakeJSON = new L.geoJson(exp_schoolswake,{
+					onEachFeature: pop_schoolswake,
+					pointToLayer: function (feature, latlng) {  
+						return L.circleMarker(latlng, {
+							radius: feature.properties.radius_qgis2leaf,
+							fillColor: feature.properties.color_qgis2leaf,
+
+							color: feature.properties.borderColor_qgis2leaf,
+							weight: 1,
+							opacity: feature.properties.transp_qgis2leaf,
+							fillOpacity: feature.properties.transp_qgis2leaf
+							}).bindLabel(feature.properties.NAMESHORT)
+						}
+					});
+								feature_group.addLayer(exp_schoolswakeJSON);
+
+				var cluster_groupschoolswakeJSON= new L.MarkerClusterGroup({showCoverageOnHover: false});
+				cluster_groupschoolswakeJSON.addLayer(exp_schoolswakeJSON);
+				
+						//add comment sign to hide this layer on the map in the initial view.
+						cluster_groupschoolswakeJSON.addTo(map);
+		var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+	    };
+	    title.update = function () {
+			this._div.innerHTML = '<h2>This is the title</h2>This is the subtitle'
+		};
+		title.addTo(map);
+		var legend = L.control({position: 'bottomright'});
+		
+		legend.onAdd = function (map) {
+		var div = L.DomUtil.create('div', 'info legend');
+		div.innerHTML = "<h3>Legend</h3><table></table>";
+    		return div;
+		};
+		legend.addTo(map);
+
+	var baseMaps = {
+		'Stamen Terrain': basemap_0
+	};
+	L.control.layers(baseMaps,{"schoolswake": cluster_groupschoolswakeJSON,"censuswake2000": exp_censuswake2000JSON,"USGSEROSOrthoNAIP": overlay_USGSEROSOrthoNAIP},{collapsed:false}).addTo(map);
+		function updateOpacity(value) {
+		
+							overlay_USGSEROSOrthoNAIP.setOpacity(value)}
+	L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+	</script>
+</body>
+</html>
+	

@@ -1,0 +1,5 @@
+CASE WHEN TYPE_2 = 'Census Area' THEN $area / 27878400 END
+
+if(TYPE_2 = 'Census Area', $area / 27878400, CENSUSAREA)
+
+if(TYPE_2 = 'Census Area', $area / 27878400, NULL)

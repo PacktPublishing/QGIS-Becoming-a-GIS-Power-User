@@ -1,0 +1,27 @@
+<html>
+<body>
+<div class="results"></div> 
+</body>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+ 
+ // ID of the Google Spreadsheet
+ var spreadsheetID = 
+ "1xAc8wpgLgTZpvZmZau20iO1dhA_31ojKSIBmlG6FMzQ";
+ 
+ // Make sure it is public or set to Anyone with link can view 
+ var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json";
+ 
+ $.getJSON(url, function(data) {
+ 
+  var entry = data.feed.entry;
+ 
+  $(entry).each(function(){
+    // Column names are name, type, etc.
+    $('.results').prepend('<h2>'+this.gsx$name.$t+'</h2><p>'+ this.title.$t +
+    '</p>'+'<p>'+this.gsx$type.$t+'</p>');
+  });
+ 
+ });
+ 
+</script>

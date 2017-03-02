@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>QGIS2leaf webmap</title>
+	
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" /> <!-- we will us e this as the styling script for our webmap-->
+	<link rel="stylesheet" href="css/MarkerCluster.css" />
+	<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+	<link rel="stylesheet" type="text/css" href="css/own_style.css">
+	<link rel="stylesheet" href="css/label.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- this is the javascript file that does the magic-->
+	<script src="js/Autolinker.min.js"></script>
+</head>
+<body>
+	<div id="map"></div> <!-- this is the initial look of the map. in most cases it is done externally using something like a map.css stylesheet were you can specify the look of map elements, like background color tables and so on.-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script> <!-- this is the javascript file that does the magic-->
+	<script src="js/leaflet-hash.js"></script>
+	<script src="js/label.js"></script>
+	<script src="js/leaflet.markercluster.js"></script>
+	
+				<script src='data/exp_toxicchannels.js' ></script>
+				
+	<script>
+		var map = L.map('map', { zoomControl:true }).fitBounds([[39.4194805496,-75.8685268698],[39.9951967581,-75.2662748017]]);
+		var hash = new L.Hash(map); //add hashes to html address to easy share locations
+		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
+	var feature_group = new L.featureGroup([]);
+
+	var raster_group = new L.LayerGroup([]);
+	
+		var basemap_0 = L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', { 
+			attribution: additional_attrib + 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'});	
+		basemap_0.addTo(map);	
+	var layerOrder=new Array();
+							function pop_toxicchannels(feature, layer) {
+										
+	var popupContent = '<table><tr><th scope="row">ID</th><td>' + Autolinker.link(String(feature.properties['ID'])) + '</td></tr><tr><th scope="row">join_SEGME</th><td>' + Autolinker.link(String(feature.properties['join_SEGME'])) + '</td></tr><tr><th scope="row">join_NODE_</th><td>' + Autolinker.link(String(feature.properties['join_NODE_'])) + '</td></tr><tr><th scope="row">join_NOD_1</th><td>' + Autolinker.link(String(feature.properties['join_NOD_1'])) + '</td></tr><tr><th scope="row">join_BASIN</th><td>' + Autolinker.link(String(feature.properties['join_BASIN'])) + '</td></tr><tr><th scope="row">join_ORDER</th><td>' + Autolinker.link(String(feature.properties['join_ORDER'])) + '</td></tr><tr><th scope="row">join_ORD_1</th><td>' + Autolinker.link(String(feature.properties['join_ORD_1'])) + '</td></tr><tr><th scope="row">join_LENGT</th><td>' + Autolinker.link(String(feature.properties['join_LENGT'])) + '</td></tr><tr><th scope="row">distance</th><td>' + Autolinker.link(String(feature.properties['distance'])) + '</td></tr></table>';
+	layer.bindPopup(popupContent);
+
+
+				}
+						
+				var exp_toxicchannelsJSON = new L.geoJson(exp_toxicchannels,{
+					onEachFeature: pop_toxicchannels,
+					pointToLayer: function (feature, latlng) {  
+						return L.circleMarker(latlng, {
+							radius: feature.properties.radius_qgis2leaf,
+							fillColor: feature.properties.color_qgis2leaf,
+
+							color: feature.properties.borderColor_qgis2leaf,
+							weight: 1,
+							opacity: feature.properties.transp_qgis2leaf,
+							fillOpacity: feature.properties.transp_qgis2leaf
+							})
+						}
+					});
+								feature_group.addLayer(exp_toxicchannelsJSON);
+
+				layerOrder[layerOrder.length] = exp_toxicchannelsJSON;
+				for (index = 0; index < layerOrder.length; index++) {
+					feature_group.removeLayer(layerOrder[index]);feature_group.addLayer(layerOrder[index]);
+				}
+				
+						//add comment sign to hide this layer on the map in the initial view.
+						exp_toxicchannelsJSON.addTo(map);
+		var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+	    };
+	    title.update = function () {
+			this._div.innerHTML = '<h2>This is the title</h2>This is the subtitle'
+		};
+		title.addTo(map);
+	var baseMaps = {
+		'MapQuestOpen OSM': basemap_0
+	};
+	L.control.layers(baseMaps,{"toxicchannels": exp_toxicchannelsJSON},{collapsed:false}).addTo(map);
+	L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+	
+	/* we’ve inserted the following after the existing index.html line 83, to handle query to cartodb */
+
+function getToxic(lon,lat)
+{
+    var toxicLayer = new L.GeoJSON();
+
+    $.getJSON("http://mearns.cartodb.com/api/v2/sql?q=%20SELECT%20toxic_channels.*%20FROM%20toxic_channels%20INNER%20JOIN%20channels%20ON%20toxic_channels.join_BASIN%20=%20channels.basin%20WHERE%20toxic_channels.join_order%20%3C%20(SELECT%20channels._order%20FROM%20channels%20WHERE%20st_distance(the_geom,%20ST_GeomFromText%20(%27POINT(" + lon + "%20" + lat + ")%27,4326))%20IN%20(SELECT%20MIN(st_distance(the_geom,%20ST_GeomFromText(%27POINT(" + lon + "%20" + lat + ")%27,4326)))%20FROM%20channels%20x))%20AND%20toxic_channels.join_basin%20=%20(SELECT%20channels.basin%20FROM%20channels%20WHERE%20st_distance(the_geom,%20ST_GeomFromText%20(%27POINT(" + lon + "%20" + lat + ")%27,4326))%20IN%20(SELECT%20MIN(st_distance(the_geom,%20ST_GeomFromText(%27POINT(" + lon + "%20" + lat + ")%27,4326)))%20FROM%20channels%20x))%20GROUP%20BY%20toxic_channels.cartodb_id%20&api_key=92e21b0ea89507bb8917b89fcaf77b298ccbb7af&format=geojson&callback=?",
+    function(geojson) {
+    $.each(geojson.features, function(i, feature) {
+    toxicLayer.addData(feature);
+    })
+    });
+    map.addLayer(toxicLayer);
+    }
+
+getToxic(-75.56111,39.72583);
+
+//getToxic(-75.70993,39.69099);
+
+</script>
+</body>
+</html>

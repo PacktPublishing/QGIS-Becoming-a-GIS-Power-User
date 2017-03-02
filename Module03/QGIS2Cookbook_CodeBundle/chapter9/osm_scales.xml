@@ -1,0 +1,25 @@
+<qgsScales version="1.0">
+<!--Approximate Tile Scales for OSM and other Spherical Mercator Projections.
+Source:http://www.3liz.com/blog/rldhont/index.php?post/2012/07/17/OpenStreetMap-Tiles-in-QGIS
+-->
+
+ <scale value="1:591659030"/>
+ <scale value="1:295829515"/>
+ <scale value="1:147914757"/>
+ <scale value="1:73957378"/>
+ <scale value="1:36978689"/>
+ <scale value="1:18489344"/>
+ <scale value="1:9244672"/>
+ <scale value="1:4622336"/>
+ <scale value="1:2311168"/>
+ <scale value="1:1155584"/>
+ <scale value="1:577792"/>
+ <scale value="1:288896"/>
+ <scale value="1:144448"/>
+ <scale value="1:72224"/>
+ <scale value="1:36112"/>
+ <scale value="1:18056"/>
+ <scale value="1:9028"/>
+ <scale value="1:4514"/>
+ <scale value="1:2257"/>
+</qgsScales>

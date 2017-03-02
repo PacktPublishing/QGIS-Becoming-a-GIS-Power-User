@@ -1,0 +1,4 @@
+<h1>Alaska</h1>
+<p>The name <i>"Alaska"</i> means "the mainland".</p>
+<ul><li>one list entry</li><li>another entry</li></ul>
+<p style="font-size:70%;">[% format_date( $now ,'yyyy-mm-dd')%]</p>

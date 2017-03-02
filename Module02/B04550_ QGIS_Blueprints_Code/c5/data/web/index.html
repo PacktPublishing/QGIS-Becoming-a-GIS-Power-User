@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="lib/d3.slider.css" />
+  <title>Geography of Jobs</title>
+</head>
+<body>
+  <div id="container">
+    <h1>White In/Out Migration</h1>
+    <h2>Net White Population Change / by Census Tract</h2>
+    <p id="intro">This visualization shows the change in White population in Philadelphia over 3 years.</p>
+    <div id="date">
+      <p>12 months ending on:</p>
+      <p id="month"></p>
+    </div>
+    <div id="play"></div>
+    <div id="slider-container">
+      <div id="slider-div"></div>
+      <div id="slider-probe">
+        <p></p>
+        <div></div>
+      </div>
+    </div>
+    <div id="map-container"></div>
+    <p id="source">Source: US Census, American Community Survey</p>
+  </div>
+  <script type="text/javascript" src="lib/d3.v3.min.js"></script>
+  <script type="text/javascript" src="lib/topojson.v1.min.js"></script>
+  <script type="text/javascript" src="lib/d3.slider.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/timeline.js"></script>
+</body>
+</html>

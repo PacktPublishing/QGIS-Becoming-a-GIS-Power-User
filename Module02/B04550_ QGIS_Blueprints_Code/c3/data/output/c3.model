@@ -1,0 +1,162 @@
+{
+    "values": {
+        "inputs": {
+            "VECTORLAYER_EXTENT": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 31.0, 
+                            "x": 126.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "VECTORLAYER_EXTENT", 
+                            "shapetype": [
+                                2
+                            ], 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "extent"
+                        }, 
+                        "class": "processing.core.parameters.ParameterVector"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "RASTERLAYER_ELEVATION": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 84.0, 
+                            "x": 127.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "RASTERLAYER_ELEVATION", 
+                            "showSublayersDialog": true, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "elevation"
+                        }, 
+                        "class": "processing.core.parameters.ParameterRaster"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }
+        }, 
+        "helpContent": {}, 
+        "group": "hydrological", 
+        "name": "toxic", 
+        "algs": {
+            "GDALOGRCLIPRASTERBYMASKLAYER_1": {
+                "values": {
+                    "name": "GDALOGRCLIPRASTERBYMASKLAYER_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 266.0, 
+                            "x": 339.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "EXTRA": null, 
+                        "ALPHA_BAND": true, 
+                        "MASK": {
+                            "values": {
+                                "name": "VECTORLAYER_EXTENT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "KEEP_RESOLUTION": true, 
+                        "INPUT": {
+                            "values": {
+                                "alg": "SAGAFILLSINKS_1", 
+                                "output": "RESULT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "NO_DATA": "-9999"
+                    }, 
+                    "active": true, 
+                    "consoleName": "gdalogr:cliprasterbymasklayer", 
+                    "description": "Clip raster by mask layer"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "SAGAFILLSINKS_1": {
+                "values": {
+                    "name": "SAGAFILLSINKS_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": false, 
+                    "pos": {
+                        "values": {
+                            "y": 160.0, 
+                            "x": 334.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "MINSLOPE": 0.01, 
+                        "DEM": {
+                            "values": {
+                                "name": "RASTERLAYER_ELEVATION"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "saga:fillsinks", 
+                    "description": "Fill Sinks"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "SAGACHANNELNETWORKANDDRAINAGEBASINS_1": {
+                "values": {
+                    "name": "SAGACHANNELNETWORKANDDRAINAGEBASINS_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 363.0, 
+                            "x": 343.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "THRESHOLD": 5.0, 
+                        "DEM": {
+                            "values": {
+                                "alg": "GDALOGRCLIPRASTERBYMASKLAYER_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "saga:channelnetworkanddrainagebasins", 
+                    "description": "Channel network and drainage basins"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }
+        }
+    }, 
+    "class": "processing.modeler.ModelerAlgorithm.ModelerAlgorithm"
+}

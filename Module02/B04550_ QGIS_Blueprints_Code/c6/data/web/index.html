@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="./resources/ol.css">
+    <link rel="stylesheet" href="./resources/ol3-layerswitcher.css">
+
+
+    <style>
+      html, body {
+          height: 100%;
+          padding: 0;
+          margin: 0;
+          font-family: sans-serif;
+          font-size: small;
+        }
+        #map {
+          width: 100%;
+          height: 100%;
+        }
+
+      .ol-popup {
+        display: none;
+        position: absolute;
+        background-color: white;
+        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;   
+        height: auto;
+        width: auto;
+        min-width: 100px;     
+      }
+      
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "X";
+      }
+    </style>
+    <script src="./resources/ol.js"></script>
+    <script src="./resources/ol3-layerswitcher.js"></script>
+
+    
+    
+  <script src="./layers/layers.js" type="text/javascript"></script> 
+    <title></title>
+  </head>
+  <body>
+  <select id="day">
+        <option value="10">2013-06-10</option>
+        <option value="11">2013-06-11</option>
+        <option value="12">2013-06-12</option>
+        <option value="13">2013-06-13</option>
+        <option value="14">2013-06-14</option>
+        <option value="15">2013-06-15</option>
+        <option value="16">2013-06-16</option>
+        <option value="17">2013-06-17</option>
+        <option value="18">2013-06-18</option>
+        <option value="19">2013-06-19</option>
+        <option value="20">2013-06-20</option>
+        <option value="21">2013-06-21</option>
+        <option value="22">2013-06-22</option>
+        <option value="23">2013-06-23</option>
+        <option value="24">2013-06-24</option>
+        <option value="25">2013-06-25</option>
+        <option value="26">2013-06-26</option>
+        <option value="27">2013-06-27</option>
+        <option value="28">2013-06-28</option>
+        <option value="29">2013-06-29</option>
+        <option value="30">2013-06-30</option>
+    </select>
+    <div id="map">
+        <div id="popup" class="ol-popup">
+          <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+          <div id="popup-content"></div>
+        </div>  
+    </div>
+    <script src="./resources/jquery.min.js"></script>
+    <script>
+      var container = document.getElementById('popup');
+      var content = document.getElementById('popup-content');
+      var closer = document.getElementById('popup-closer');
+      closer.onclick = function() {
+        container.style.display = 'none';
+        closer.blur();
+        return false;
+      };
+      var overlayPopup = new ol.Overlay({
+        element: container
+      });
+
+      var map = new ol.Map({
+        controls: ol.control.defaults().extend([
+          new ol.control.ScaleLine({}),new ol.control.LayerSwitcher({tipLabel: "Layers"})
+        ]),
+        target: document.getElementById('map'),
+        renderer: 'canvas',
+        overlays: [overlayPopup],
+        layers: layersList,
+        view: new ol.View({
+           maxZoom: 18, minZoom: 9
+        })
+      });
+      map.getView().fitExtent([-8501636.843034, 4685475.658776, -8308790.010620, 4834402.518300], map.getSize());
+
+      var NO_POPUP = 0
+      var ALL_FIELDS = 1
+
+      popupLayers = [];
+
+      var featureOverlay = new ol.FeatureOverlay({
+        map: map,
+        style: [new ol.style.Style({
+              stroke: new ol.style.Stroke({
+                color: '#f00',
+                width: 1
+              }),
+              fill: new ol.style.Fill({
+                color: 'rgba(255,0,0,0.1)'
+              }),
+              })]          
+      });
+
+
+      var doHighlight = false;
+      var doHover = false;
+
+      var highlight;
+      var onPointerMove = function(evt) {
+        if (!doHover && !doHighlight){
+          return;
+        }
+        var pixel = map.getEventPixel(evt.originalEvent);
+        var coord = evt.coordinate;
+        var popupField;
+        var popupText = '';
+        var currentFeature;
+        var currentFeatureKeys;
+        map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+          currentFeature = feature;
+          currentFeatureKeys = currentFeature.getKeys();
+          var field = popupLayers[layersList.indexOf(layer) - 1];
+          if (field == NO_POPUP){          
+          }
+          else if (field == ALL_FIELDS){
+            for ( var i=0; i<currentFeatureKeys.length;i++) {
+                if (currentFeatureKeys[i] != 'geometry') {
+                    popupField = currentFeatureKeys[i] + ': '+ currentFeature.get(currentFeatureKeys[i]);
+                    popupText = popupText + popupField+'<br>';
+                }
+            }
+          }
+          else{
+            var value = feature.get(field);
+            if (value){
+              popupText = field + ': ' + value;
+            }  
+          }          
+        });
+
+        if (doHighlight){
+          if (currentFeature !== highlight) {
+            if (highlight) {
+              featureOverlay.removeFeature(highlight);
+            }
+            if (currentFeature) {
+              featureOverlay.addFeature(currentFeature);
+            }
+            highlight = currentFeature;
+          }
+        }
+
+        if (doHover){
+          if (popupText) {
+            overlayPopup.setPosition(coord);
+            content.innerHTML = popupText;
+            container.style.display = 'block';        
+          } else {
+            container.style.display = 'none';
+            closer.blur();
+          }
+        }
+      };
+
+      var onSingleClick = function(evt) {
+        var popupText = '';
+        var newCoord = ol.proj.transform(evt.coordinate, 'EPSG:3857','EPSG:4326');
+        //var newCoord = ol.project.transform(evt.coordinates, 'EPSG:3857','EPSG:4326');
+        
+        
+        day = $('#day').val();
+        date = $('#day option:selected').text();
+        jQuery.ajax({ 
+            url: "http://localhost:8000/cgi-bin/get_json.py",
+            data: {"longitude": newCoord[0], "latitude": newCoord[1], "day": day}
+        })
+        .done(function(response) {
+            popupText = '<span style="font-size: x-small">Vulnerability Index (1=Least Vulnerable, 10=Most Vulnerable):</span> <span style="font-weight: 900;">' + response.index_value + '</span><div style="word-break: break-all; border: thin dotted grey; padding: .5px; font-size: x-small">On ' + date + ' at <span style="white-space:nowrap;">(' +  newCoord[1].toFixed(4) + ',' + newCoord[0].toFixed(4) + ')</span></div>';
+            //$( "#results" ).append( html );
+            if (popupText) {
+                overlayPopup.setPosition(coord);
+                content.innerHTML = popupText;
+                container.style.display = 'block';        
+            } else {
+              container.style.display = 'none';
+              closer.blur();
+            }
+        });
+
+        
+        if (doHover){
+          return;
+        }
+        var pixel = map.getEventPixel(evt.originalEvent);
+        var coord = evt.coordinate;
+       /* var popupField;
+        
+        var currentFeature;
+        var currentFeatureKeys;
+        map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+          currentFeature = feature;
+          currentFeatureKeys = currentFeature.getKeys();
+          var field = popupLayers[layersList.indexOf(layer) - 1];
+          if (field == NO_POPUP){          
+          }
+          else if (field == ALL_FIELDS){
+            for ( var i=0; i<currentFeatureKeys.length;i++) {
+                if (currentFeatureKeys[i] != 'geometry') {
+                    popupField = currentFeatureKeys[i] + ': '+ currentFeature.get(currentFeatureKeys[i]);
+                    popupText = popupText + popupField+'<br>';
+                }
+            }
+          }
+          else{
+            var value = feature.get(field);
+            if (value){
+              popupText = field + ': '+ value;
+            }  
+          }          
+        }); */
+
+      };
+
+      map.on('pointermove', function(evt) {
+        onPointerMove(evt);
+      });
+      map.on('singleclick', function(evt) {
+        onSingleClick(evt);
+      });
+      </script>
+  </body>
+</html>

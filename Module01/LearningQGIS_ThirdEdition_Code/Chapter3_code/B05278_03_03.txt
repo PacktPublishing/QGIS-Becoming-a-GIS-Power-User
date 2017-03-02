@@ -1,0 +1,9 @@
+@row_number 
+$length 
+$area 
+$x
+$y
+$x_at(0) 
+$y_at(0) 
+$x_at(-1) 
+$y_at(-1)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAGA_METADATA>
+  <HISTORY>
+    <MODULE>Fill Sinks (Planchon/Darboux, 2001)</MODULE>
+    <OPTION type="double" id="MINSLOPE" name="Minimum Slope [Degree]">0.010000</OPTION>
+    <OPTION type="grid_system" id="PARAMETERS_GRID_SYSTEM" name="Grid system">
+      <CELLSIZE>30</CELLSIZE>
+      <XMIN>160129</XMIN>
+      <XMAX>203839</XMAX>
+      <YMIN>138598</YMIN>
+      <YMAX>208438</YMAX>
+      <DATA type="grid" id="DEM" name="DEM">
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c3/data/original/dem/dem.tif"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>C:\Users\mearns\AppData\Local\Temp\processing\88afb7ab77fa4b8ea77d165b84d927aa\dem.sgrd</DATA>
+    </OPTION>
+    <DATA type="grid" id="DEM" name="DEM">
+      <MODULE>GDAL: Import Raster</MODULE>
+      <OPTION type="file" id="FILES" name="Files">"C:/packt/c3/data/original/dem/dem.tif"</OPTION>
+      <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+      <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>C:\Users\mearns\AppData\Local\Temp\processing\88afb7ab77fa4b8ea77d165b84d927aa\dem.sgrd</DATA>
+  </HISTORY>
+  <SOURCE>
+    <FILE>C:\packt\c3\data\output\fill.tif.sgrd</FILE>
+    <DATABASE></DATABASE>
+    <PROJECTION>
+      <OGC_WKT>PROJCS["NAD_1983_HARN_StatePlane_Delaware_FIPS_0700",GEOGCS["GCS_North_American_1983_HARN",DATUM["NAD83_High_Accuracy_Reference_Network",SPHEROID["GRS_1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6152"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",38],PARAMETER["central_meridian",-75.41666666666667],PARAMETER["scale_factor",0.999995],PARAMETER["false_easting",200000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]</OGC_WKT>
+      <PROJ4>+proj=tmerc +a=6378137.000000 +b=6356752.314140 +lat_0=38 +lon_0=-75.41666666666667 +k_0=0.999995 +x_0=200000 +y_0=0 +no_defs</PROJ4>
+      <EPSG>-1</EPSG>
+    </PROJECTION>
+  </SOURCE>
+  <DESCRIPTION></DESCRIPTION>
+</SAGA_METADATA>

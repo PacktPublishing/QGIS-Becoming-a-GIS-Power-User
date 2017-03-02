@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAGA_METADATA>
+  <HISTORY>
+    <MODULE>Proximity Grid</MODULE>
+    <OPTION type="grid_system" id="PARAMETERS_GRID_SYSTEM" name="Grid system">
+      <CELLSIZE>222.36701400000001</CELLSIZE>
+      <XMIN>168436.8921070005</XMIN>
+      <XMAX>190673.59350700048</XMAX>
+      <YMIN>143560.1332000033</YMIN>
+      <YMAX>203821.59399400331</YMAX>
+      <DATA type="grid" id="FEATURES" name="Features">
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c2/data/easements.tif"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>C:\Users\mearns\AppData\Local\Temp\processing\c8c55ff1afe6457e96d8ea5eae0c8501\easements.sgrd</DATA>
+    </OPTION>
+    <DATA type="grid" id="FEATURES" name="Features">
+      <MODULE>GDAL: Import Raster</MODULE>
+      <OPTION type="file" id="FILES" name="Files">"C:/packt/c2/data/easements.tif"</OPTION>
+      <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+      <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>C:\Users\mearns\AppData\Local\Temp\processing\c8c55ff1afe6457e96d8ea5eae0c8501\easements.sgrd</DATA>
+  </HISTORY>
+  <SOURCE>
+    <FILE>C:\packt\c2\data\model\easements_prox.tif.sgrd</FILE>
+    <DATABASE></DATABASE>
+    <PROJECTION>
+      <OGC_WKT>PROJCS["NAD83_HARN_Delaware",GEOGCS["GCS_NAD83(HARN)",DATUM["NAD83_High_Accuracy_Reference_Network",SPHEROID["GRS_1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6152"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",38],PARAMETER["central_meridian",-75.41666666666667],PARAMETER["scale_factor",0.999995],PARAMETER["false_easting",200000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]</OGC_WKT>
+      <PROJ4>+proj=tmerc +a=6378137.000000 +b=6356752.314140 +lat_0=38 +lon_0=-75.41666666666667 +k_0=0.999995 +x_0=200000 +y_0=0 +no_defs</PROJ4>
+      <EPSG>-1</EPSG>
+    </PROJECTION>
+  </SOURCE>
+  <DESCRIPTION></DESCRIPTION>
+</SAGA_METADATA>

@@ -1,0 +1,6 @@
+#Concatenate Date and Time
+"shpdate"  || ' '||  "Time"
+
+
+#Rearrange date
+substr("Date",7,4) ||'-'|| substr("Date",1,2) ||'-'|| substr("Date",4,2) || ' ' ||  "Time"

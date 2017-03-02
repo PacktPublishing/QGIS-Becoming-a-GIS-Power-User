@@ -1,0 +1,3 @@
+( "landcover@1" > 0 AND "landcover@1" <= 6 ) * 100
++ ( "landcover@1" >= 7 AND "landcover@1" <= 10 ) * 101
++ ( "landcover@1" >= 11 ) * 102

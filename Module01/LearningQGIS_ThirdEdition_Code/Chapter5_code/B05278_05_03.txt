@@ -1,0 +1,2 @@
+ramp_color('Reds', T_F_MEAN / 46) 
+color_rgba(0, 0, 180, scale_linear(T_F_JUL - T_F_JAN, 20, 70, 0, 255)) 

@@ -1,0 +1,117 @@
+{
+  "bounds": [
+    -75.8537,
+    39.7943,
+    -75.6519,
+    39.9376
+  ],
+  "center": [
+    -75.7514,
+    39.8715,
+    11
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "buildings",
+    "template_teaser": "{{{id}}}",
+    "template_full": "{{{id}}}"
+  },
+  "minzoom": 11,
+  "maxzoom": 16,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss",
+    "highway",
+    "labels"
+  ],
+  "Layer": [
+    {
+      "id": "countries",
+      "name": "countries",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "geometry": "polygon",
+      "Datasource": {
+        "file": "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-admin-0-countries.zip",
+        "type": "shape"
+      }
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -75.92594609999999,
+        38.549446504064264,
+        -75.04922,
+        40.05548389439551
+      ],
+      "id": "roads",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\packt\\c7\\data\\original\\delaware-latest-3875\\roads.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "roads"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -75.77762209999999,
+        39.84369201444803,
+        -75.7206162,
+        39.88702934054149
+      ],
+      "id": "buildings",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\packt\\c7\\data\\original\\delaware-latest-3875\\buildings.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "buildings"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -75.7865644,
+        38.63981514562177,
+        -75.0504589,
+        40.0286142587331
+      ],
+      "id": "places",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\packt\\c7\\data\\original\\delaware-latest-3875\\places.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "places"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -75.92594609999999,
+        38.549446504064264,
+        -75.04922,
+        40.05548389439551
+      ],
+      "id": "bridges",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\packt\\c7\\data\\original\\delaware-latest-3875\\roads.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "bridges"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "name": "c7",
+  "description": "packt, qgis, c7",
+  "attribution": "",
+  "legend": ""
+}

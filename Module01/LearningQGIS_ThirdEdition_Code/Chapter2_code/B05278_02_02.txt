@@ -1,0 +1,2 @@
+"Name" = 'EMILIA-ROMAGNA' 
+"Name" LIKE 'ISOLA%'

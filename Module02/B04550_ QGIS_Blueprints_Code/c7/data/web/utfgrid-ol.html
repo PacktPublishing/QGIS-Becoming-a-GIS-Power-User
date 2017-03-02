@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TileUTFGrid example</title>
+<!— dependencies -->
+<script src="https://code.jquery.com/jquery-1.11.2.min.js">
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/
+bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap
+/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/
+libs/ol3/3.6.0/ol.css" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/
+ol3/3.6.0/ol.js"></script>
+</head>
+<body>
+<!-- html layout -->
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span12">
+<div id="map" class="map"></div>
+</div>
+</div>
+<div style="display: none;">
+<!-- Overlay with target info -->
+<div id="info-info">
+<div id="info-name">&nbsp;</div>
+</div>
+</div>
+</div>
+<script>
+// new openlayers tile object, pointing to TileJSON object
+from our mapbox service
+var mapLayer = new ol.layer.Tile({
+source: new ol.source.TileJSON({
+url: 'http://api.tiles.mapbox.com/v3/bmearns.c7.json?
+access_token=YOURMAPBOXTOKENHERE'
+})
+});
+// new openlayers UTFGrid object
+var gridSource = new ol.source.TileUTFGrid({
+url: 'http://api.tiles.mapbox.com/v3/bmearns.c7.json?
+access_token=YOURMAPBOXTOKENHERE'
+});
+var gridLayer = new ol.layer.Tile({source: gridSource});
+var view = new ol.View({
+center: [-8432793.2,4846930.4],
+zoom: 15
+});
+var mapElement = document.getElementById('map');
+var map = new ol.Map({
+layers: [mapLayer, gridLayer],
+target: mapElement,
+view: view
+});
+var infoElement = document.getElementById('infoinfo');;);;);;
+var nameElement = document.getElementById('info-name');
+var infoOverlay = new ol.Overlay({
+element: infoElement,
+offset: [15, 15],
+stopEvent: false
+});
+// If you want to use the template from the TileJSON,
+// load the mustache.js library separately and call
+// info.innerHTML = Mustache.render(gridSource.
+getTemplate(), data);
+mapElement.style.cursor = data ? 'pointer' : '';
+if (data) {
+nameElement.innerHTML = data['id'];
+}
+infoOverlay.setPosition(data ? coordinate : undefined);
+});
+};
+// registering event handlers
+map.on('pointermove', function(evt) {
+if (evt.dragging) {
+return;
+}
+var coordinate = map.getEventCoordinate(evt.original
+Event);
+displayInfo(coordinate);
+});
+map.on('click', function(evt) {
+displayInfo(evt.coordinate);
+});
+</script>
+map.addOverlay(infoOverlay);
+// creating function to register as event handler, to
+display info based on coordinate and view resolution
+var displayInfo = function(coordinate) {
+var viewResolution = /** @type {number} */
+(view.getResolution());
+gridSource.forDataAtCoordinateAndResolution(coordinate,
+viewResolution,
+function(data) {

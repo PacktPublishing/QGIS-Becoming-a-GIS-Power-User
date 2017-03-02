@@ -1,0 +1,13 @@
+SELECT * 
+FROM HighWays
+WHERE PtDistWithin(
+  HighWays.Geometry, 
+  (SELECT Geometry FROM Towns WHERE Name = 'Firenze'),
+  1000
+)
+
+SELECT Regions.Name, Regions.Geometry, count(*) as Count
+FROM Regions
+JOIN Towns
+  ON Within(Towns.Geometry,Regions.Geometry)
+GROUP BY Regions.Name

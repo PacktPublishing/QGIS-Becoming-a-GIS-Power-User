@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAGA_METADATA>
+  <HISTORY>
+    <MODULE>Add Grid Values to Points</MODULE>
+    <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+    <DATA type="shapes" id="SHAPES" name="Points">
+      <FILE>C:\packt\c6\data\prep\sample.shp</FILE>C:\packt\c6\data\prep\sample.shp</DATA>
+    <DATA_LIST type="grid_list" id="GRIDS" name="Grids">
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc10.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc11.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc12.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc13.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc14.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc15.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc16.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">
+          <OGC_WKT>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4326"]]</OGC_WKT>
+          <PROJ4>+init=epsg:4326 +proj=longlat +a=6378137.000000 +b=6356752.314245 +no_defs</PROJ4>
+          <EPSG>-1</EPSG>TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">C:\Users\mearns\AppData\Local\Temp\processing\85715b0dbff944fbb2024659e80dc610\calc16.sgrd</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc17.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc18.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc19.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc20.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc21.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc22.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc23.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc24.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc25.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc26.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc27.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">C:\Users\mearns\AppData\Local\Temp\processing\ab3f4150f4a241189ad4d6b497658804\calc27.sgrd</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc28.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc29.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+      <DATA>
+        <MODULE>GDAL: Import Raster</MODULE>
+        <OPTION type="file" id="FILES" name="Files">"C:/packt/c6/data/prep/calc30.tiff"</OPTION>
+        <OPTION type="boolean" id="TRANSFORM" name="Transformation">TRUE</OPTION>
+        <OPTION type="choice" id="INTERPOL" name="Interpolation">0</OPTION>
+      </DATA>
+    </DATA_LIST>
+  </HISTORY>
+  <SOURCE>
+    <FILE>C:/packt/c6/data/prep/sample_data.shp</FILE>
+    <DATABASE></DATABASE>
+    <PROJECTION>
+      <OGC_WKT>GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]</OGC_WKT>
+      <PROJ4>+proj=longlat +a=6378137.000000 +b=6356752.314245 +no_defs</PROJ4>
+      <EPSG>-1</EPSG>
+    </PROJECTION>
+  </SOURCE>
+  <DESCRIPTION></DESCRIPTION>
+</SAGA_METADATA>

@@ -1,0 +1,2 @@
+"type" = 'Major Highway'
+"type" = 'Secondary Highway'
