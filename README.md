@@ -1,7 +1,7 @@
 # QGIS: Becoming a GIS Power User
 This is the code repository for [QGIS: Becoming a GIS Power User] (https://www.packtpub.com/big-data-and-business-intelligence/qgisbecoming-gis-power-user), published by Packt. It contains all the necessary code files.
 
-##What You Will Learn:
+## What You Will Learn:
 
 * Create your first map by styling both vector and raster layers from different data sources
 * Use parameters such as precipitation, relative humidity, and temperature to predict the vulnerability of fields and crops to mildew
