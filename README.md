@@ -1,5 +1,5 @@
 # QGIS: Becoming a GIS Power User
-This is the code repository for [QGIS: Becoming a GIS Power User] (https://www.packtpub.com/big-data-and-business-intelligence/qgisbecoming-gis-power-user), published by Packt. It contains all the necessary code files.
+This is the code repository for [QGIS: Becoming a GIS Power User](https://www.packtpub.com/big-data-and-business-intelligence/qgisbecoming-gis-power-user), published by Packt. It contains all the necessary code files.
 
 ## What You Will Learn:
 
@@ -12,5 +12,5 @@ This is the code repository for [QGIS: Becoming a GIS Power User] (https://www.p
 
 
 ### Feedback
-[Click here] (https://docs.google.com/forms/d/e/1FAIpQLSe5qwunkGf6PUvzPirPDtuy1Du5Rlzew23UBp2S-P3wB-GcwQ/viewform) if you have any feedback or suggestions.
+[Click here](https://docs.google.com/forms/d/e/1FAIpQLSe5qwunkGf6PUvzPirPDtuy1Du5Rlzew23UBp2S-P3wB-GcwQ/viewform) if you have any feedback or suggestions.
 
