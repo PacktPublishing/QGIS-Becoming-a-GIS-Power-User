@@ -11,6 +11,6 @@ This is the code repository for [QGIS: Becoming a GIS Power User] (https://www.p
 * Get the most out of the cartographic tools to in QGIS to reveal the advanced tips and tricks of cartography
 
 
-###Feedback
+### Feedback
 [Click here] (https://docs.google.com/forms/d/e/1FAIpQLSe5qwunkGf6PUvzPirPDtuy1Du5Rlzew23UBp2S-P3wB-GcwQ/viewform) if you have any feedback or suggestions.
 
